@@ -17,6 +17,7 @@ const client = new MongoClient(uri, {
   },
 });
 
+
 async function run() {
   try {
     await client.connect();
@@ -29,6 +30,7 @@ async function run() {
       res.send('Task Master Server');
     });
 
+
     app.get('/tasks', async (req, res) => {
       try {
         const tasks = await tasksCollection.find({}).toArray();
@@ -38,6 +40,7 @@ async function run() {
         res.status(500).json({ error: 'Internal Server Error' });
       }
     });
+
 
     app.post('/tasks', async (req, res) => {
       const newTask = req.body;
@@ -50,6 +53,7 @@ async function run() {
         res.status(500).json({ error: 'Internal Server Error' });
       }
     });
+
 
     app.delete('/tasks/:id', async (req, res) => {
       const taskId = req.params.id;
@@ -69,6 +73,7 @@ async function run() {
       }
     });
 
+    
     app.patch('/tasks/:id', async (req, res) => {
       const taskId = req.params.id;
       const updatedTaskData = req.body;
